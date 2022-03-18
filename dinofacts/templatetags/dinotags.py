@@ -83,3 +83,23 @@ def dino_list(context, title):
 @register.inclusion_tag("sublist.html")
 def include_list(iterator):
     return {"iterator": iterator}
+
+
+# Advanced tags 
+
+import mistune
+
+@register.tag(name="markdown")
+def do_markdown(parser, token):
+    nodelist = parser.parse(("endmarkdown",))
+    parser.delete_first_token()
+    return MarkdownNode(nodelist)
+
+class MarkdownNode(template.Node):
+    def __init__(self, nodelist):
+        self.nodelist = nodelist
+
+    def render(self, context):
+        content = self.nodelist.render(context)
+        result = mistune.markdown(str(content))
+        return result
