@@ -1,0 +1,1 @@
+Dhjango template tags exploration based @ https://realpython.com/django-template-custom-tags-filters/
