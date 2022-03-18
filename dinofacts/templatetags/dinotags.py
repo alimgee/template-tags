@@ -78,3 +78,8 @@ def dino_list(context, title):
 
     context["weight"] = "20 tons"
     return mark_safe(output)
+
+
+@register.inclusion_tag("sublist.html")
+def include_list(iterator):
+    return {"iterator": iterator}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load dinotags %}
+
+{% block content %}
+
+<h1>Brachiosaurus</h1>
+
+<p>
+  Brachiosaurus (arm lizard) is yet another long-necked quadruped.
+
+</p>
+
+<h2> Using include_list </h2>
+{% include_list dinosaurs %}
+
+{% endblock content %}
