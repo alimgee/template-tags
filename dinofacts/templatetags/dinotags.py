@@ -1,6 +1,6 @@
 from django import template
 from django.template.defaultfilters import stringfilter
-from django.utils.html import conditional_escape, mark_safe
+from django.utils.html import conditional_escape, mark_safe, escape
 
 
 register = template.Library()
@@ -47,3 +47,21 @@ def letter_count(value, letter, autoescape=True):
 def bold_time(when):
     ''' tag that returns local time'''
     return mark_safe(f"<b>{when}</b>")
+
+
+@register.simple_tag
+def mute(*args):
+    '''simple custom tag without filter'''
+    return ""
+
+
+@register.simple_tag
+def make_ul(iterable):
+    ''' simple tage that auto escapes html list'''
+    content = ["<ul>"]
+    for item in iterable:
+        content.append(f"<li>{escape(item)}</li>")
+
+    content.append("</ul>")
+    content = "".join(content)
+    return mark_safe(content)
