@@ -7,6 +7,7 @@ register = template.Library()
 
 @register.filter
 def first_letters(iterable):
+    ''' basic tag that returns the first letter in an iterable'''
     result = ""
     for item in iterable:
         result += item[0]
@@ -16,6 +17,7 @@ def first_letters(iterable):
 
 @register.filter(name="nth_letters", is_safe=True)
 def other_letters(iterable, num):
+    ''' tag that returns the letter at num value for each iteration'''
     result = ""
     for item in iterable:
         if len(item) <= num or not item[num - 1].isalpha():
@@ -29,6 +31,7 @@ def other_letters(iterable, num):
 @register.filter(needs_autoescape=True)
 @stringfilter
 def letter_count(value, letter, autoescape=True):
+    ''' string tag example - returns a string to the page'''
     if autoescape:
         value = conditional_escape(value)
 
@@ -38,3 +41,9 @@ def letter_count(value, letter, autoescape=True):
     )
 
     return mark_safe(result)
+
+
+@register.filter(expects_localtime=True)
+def bold_time(when):
+    ''' tag that returns local time'''
+    return mark_safe(f"<b>{when}</b>")
