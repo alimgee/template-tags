@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load dinotags %}
+
+{% block content %}
+
+<h1>Triceratops</h1>
+
+<p>
+  Triceratops (three-horned face) is a plant eating quadruped from the
+  Late Cretaceous period.
+
+</p>
+
+{% shownodes "pointy face" "stubby tail"%}
+It has a large bony frill around its neck. A fully grown adult weighed 
+{{ weight }}. {% comment %} put more info here {% endcomment %}
+{% endshownodes %}
+
+{% endblock content %}
